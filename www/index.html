@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Blog DevFest Nantes</title>
+  </head>
+  <body>
+    <ion-app>
+      <ion-header translucent>
+        <ion-toolbar>
+          <ion-title>Blog DevFest Nantes</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list id="event-list"></ion-list>
+        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+          <ion-fab-button size="small" id="take-picture">📷</ion-fab-button>
+        </ion-fab>
+      </ion-content>
+    </ion-app>
+    <ion-modal is-open="false" id="form-modal">
+      <ion-content>
+        <ion-header>
+          <ion-title class="ion-text-center">
+            Création d'un article privé
+          </ion-title>
+          <ion-button type="click" id="close-modal-button">X</ion-button>
+        </ion-header>
+        <form id="post-picture-form">
+          <ion-item>
+            <ion-label position="stacked">Titre</ion-label>
+            <ion-input required="true" id="title-input" />
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Description</ion-label>
+            <ion-input required="true" id="description-input" />
+          </ion-item>
+          <ion-button type="submit" id="submit-modal-button">
+            Enregistrer
+          </ion-button>
+        </form>
+      </ion-content>
+    </ion-modal>
+    <script src="index.js"></script>
+  </body>
+</html>
