@@ -6,15 +6,15 @@ import {defineCustomElements} from "@ionic/core/loader"
 const init = async () => {
     // chargement de tous les composants
     // la démarche n'est pas optimale car nous importons tous les composants
-    await defineCustomElements();
+    await defineCustomElements()
 
 
-    const response = await fetch('https://devfest-nantes-2018-api.cleverapps.io/blog');
-    const data = await response.json();
+    const response = await fetch('https://devfest-nantes-2018-api.cleverapps.io/blog')
+    const data = await response.json()
 
-    const eventList = document.getElementById("event-list");
+    const eventList = document.getElementById("event-list")
 
-    const src = 'https://devfest2018.gdgnantes.com/';
+    const src = 'https://devfest2018.gdgnantes.com/'
 
     data.forEach(event => {
         eventList.innerHTML += '<ion-card>\n'
@@ -25,14 +25,14 @@ const init = async () => {
         '      <ion-card-content>\n' +
                 event.brief +
         '      </ion-card-content>\n' +
-        '    </ion-card>';
-    });
+        '    </ion-card>'
+    })
 
 
         
 
 }
 
-init();
+init()
 
-const toto = 'test toto';
+const toto = 'test toto'
