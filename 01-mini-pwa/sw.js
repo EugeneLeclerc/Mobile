@@ -2,20 +2,20 @@ const FILES_TO_CACHE = [
     '/',
     'app.css',
     'app.js'
-];
+]
 
-const STATIC_CACHE_NAME = 'pages-cache-v2';
+const STATIC_CACHE_NAME = 'pages-cache-v2'
 
-importScripts('https://cdn.jsdelivr.net/gh/mozilla/localForage@master/dist/localforage.js');
+importScripts('https://cdn.jsdelivr.net/gh/mozilla/localForage@master/dist/localforage.js')
 
 self.addEventListener('install', event => {
-    console.log('Installation du Service Worker...');
-    console.log('Mise en cache des ressources');
+    console.log('Installation du Service Worker...')
+    console.log('Mise en cache des ressources')
     event.waitUntil(
         Promise.all([
             caches.open(STATIC_CACHE_NAME)
             .then(cache => {
-                return cache.addAll(FILES_TO_CACHE);
+                return cache.addAll(FILES_TO_CACHE)
             }),
               fetch('https://raw.githubusercontent.com/DevInstitut/conference-data/master/speakers.json')
                   .then(resp => resp.json())
@@ -26,19 +26,19 @@ self.addEventListener('install', event => {
                       }
                   })]
             )
-    );
-});
+    )
+})
 
 self.addEventListener('fetch', event => {
-    console.log('Fetching:', event.request.url);
+    console.log('Fetching:', event.request.url)
 
     event.respondWith(
         caches.match(event.request).then(response => {
             if (response) {
-                console.log(event.request.url, 'servi depuis le cache');
-                return response;
+                console.log(event.request.url, 'servi depuis le cache')
+                return response
             }
-            console.log(event.request.url, 'servi depuis le réseau');
+            console.log(event.request.url, 'servi depuis le réseau')
             return fetch(event.request)
 
         })
@@ -50,22 +50,22 @@ self.addEventListener('fetch', event => {
 
                 // mise en cache des ressources qui ne contiennent pas no.cache
                 if (event.request.url.indexOf('no.cache') < 0) {
-                    cache.put(event.request.url, response.clone());
+                    cache.put(event.request.url, response.clone())
                 }
-                return response;
-            });
+                return response
+            })
         })
 
         .catch(error => {
-            console.log("oops", error);
+            console.log("oops", error)
         })
-    );
-});
+    )
+})
 
 self.addEventListener('activate', event => {
-    console.log('Activating new service worker...');
+    console.log('Activating new service worker...')
 
-    const cacheWhitelist = [STATIC_CACHE_NAME];
+    const cacheWhitelist = [STATIC_CACHE_NAME]
 
     // suppression des caches excepté le cache courant (STATIC_CACHE_NAME)
     event.waitUntil(
@@ -73,13 +73,13 @@ self.addEventListener('activate', event => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheWhitelist.indexOf(cacheName) < 0) {
-                        return caches.delete(cacheName);
+                        return caches.delete(cacheName)
                     }
                 })
-            );
+            )
         })
-    );
-});
+    )
+})
 
 self.addEventListener('message', event => {
     // traitement du message (event.data)
@@ -92,6 +92,6 @@ self.clients.matchAll().then(function(clients) {
         client.postMessage({
             "command": "HELLO_LES_CLIENTS",
             "message": "Hello je suis un SW"
-        });
+        })
     })
 })
