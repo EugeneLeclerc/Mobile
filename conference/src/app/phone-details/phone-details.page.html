@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>phone-details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+  <div *ngIf="supported">
+    Platform : {{ platform }} <br />
+    Version : {{ version }} <br />
+    UUID : {{ uuid }} <br />
+    Model : {{ model }} <br />
+  </div>
+  <div *ngIf="!supported">
+    Votre plateforme ne supporte pas l'affichage des informations détaillées.
+    C'est probablement le cas parce que vous êtes sur navigateur plutôt que sur
+    mobile.
+  </div>
+</ion-content>
