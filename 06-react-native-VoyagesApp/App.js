@@ -1,13 +1,24 @@
-import {useState} from 'react';
-
-import {MenuPrincipal} from "./src/MenuPrincipal";
-
+import { useState } from "react";
+import { MyTabs } from "./src/MenuPrincipal";
 
 export default function App() {
+  const [voyages, setVoyages] = useState([]);
 
-    const [voyages] = useState([]);
+  const ajouterVoyage = (voyage) => {
+    setVoyages((currentVoyages) => currentVoyages.concat(voyage));
+  };
 
-    return (
-        <MenuPrincipal screenProps={{}}/>
-    );
+  const ajouterLieu = (voyage, lieu) => {
+    const index = voyages.findIndex((v) => v.id === voyage.id);
+    voyages[index].lieux.push(lieu);
+  };
+
+  return (
+    <MyTabs
+      screenProps={{}}
+      voyages={voyages}
+      onAjouterVoyage={ajouterVoyage}
+      onAjouterLieu={ajouterLieu}
+    />
+  );
 }
