@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
+import { map, mergeMap } from 'rxjs/operators';
 import { CachingService } from './caching.service';
 
 @Injectable({
@@ -12,28 +12,54 @@ export class SessionService {
   public connected = true;
 
   private baseUrl = 'https://devfest-nantes-2018-api.cleverapps.io/';
+  private sessionUrl = `${this.baseUrl}sessions`;
+  private speakerUrl = `${this.baseUrl}speakers`;
 
   constructor(
     private httpClient: HttpClient,
     private cachingService: CachingService
   ) {
+
+    this.initSessions();
   }
 
-  public getSessions(): Observable<any> {
+  public getSessions(): any {
+    return this.cachingService.getCachedRequest(this.sessionUrl);
+  }
 
-    return this.httpClient.get(this.baseUrl + 'sessions')
-      .pipe(
-        map((data) => {
-          const sessionMap = new Map<string, any>();
+  public async getSessionById(id: string): Promise<any> {
+    const sessions = await this.cachingService.getCachedRequest(this.sessionUrl);
 
-          Object.entries(data)
-            .forEach(((entry) => {
-              sessionMap.set(entry[0], entry[1]);
-            }));
+    return sessions[id];
+  }
 
-          return sessionMap;
-        })
-      );
+  private initSessions() {
+
+    forkJoin([
+      this.httpClient.get(this.sessionUrl),
+      this.httpClient.get(this.speakerUrl)
+    ])
+      .pipe(map(([sessions, speakers]) => {
+
+        const sessionList = Object.entries(sessions)
+          .map((session) => session[1]);
+
+        sessionList.map((session) => {
+          const speakerList = [];
+          session.speakers?.forEach(speakerId => {
+            speakerList.push(speakers[speakerId]);
+          });
+
+          session.speakers = speakerList;
+
+        });
+
+        return sessions;
+      }))
+      .subscribe((data) => {
+        this.cachingService.cacheRequest(this.sessionUrl, data);
+      });
+
   }
 
 }

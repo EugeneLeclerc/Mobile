@@ -10,7 +10,7 @@ import { SessionService } from '../services/session.service';
 })
 export class SessionListPage implements OnInit {
 
-  public sessionList$: Observable<any[]>;
+  public sessionList$: Promise<any[]>;
 
   constructor(
     @Inject(SessionService) private sessionService: SessionService,
@@ -23,7 +23,6 @@ export class SessionListPage implements OnInit {
 
   public onDetail(id: string): void{
     this.router.navigate(['/session-detail', id]);
-    console.log(id);
   }
 
 }

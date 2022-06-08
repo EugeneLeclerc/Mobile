@@ -7,9 +7,14 @@ import { CachingService } from './services/caching.service';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'Session List', url: '/session-list', icon: 'list' },
-    { title: 'Device Details', url: '/phone-details', icon: 'phone-portrait' },
+    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
+    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
+    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
+    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
   ];
+  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(private cachingService: CachingService) {
     this.cachingService.initStorage();

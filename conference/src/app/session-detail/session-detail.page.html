@@ -8,20 +8,20 @@
 </ion-header>
 
 <ion-content>
-
-  <h1 [innerHTML]="session.title"></h1>
+  <h1 [innerHTML]="session?.title"></h1>
+  <p [innerHTML]="session?.description"></p>
 
   <ion-list>
-    <ion-item *ngFor="let speaker of speakerList">
+    <ion-item *ngFor="let speaker of session?.speakers | keyvalue">
       <ion-avatar slot="start">
-        <img [src]="'https://devfest2018.gdgnantes.com/' + speaker.photoUrl">
+        <img [src]="'https://devfest2018.gdgnantes.com/' + speaker?.value?.photoUrl">
       </ion-avatar>
       <ion-label>
-        {{speaker.name}}
+        {{speaker?.value?.name}}
       </ion-label>
     </ion-item>
   </ion-list>
 
   <ion-button expand="block" (click)="openNotes(session.id)">Mes notes</ion-button>
 
-</ion-content>
+</ion-content>git l

@@ -5,40 +5,30 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'folder/Inbox',
-    pathMatch: 'full',
+    pathMatch: 'full'
+  },
+  {
+    path: 'folder/:id',
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'session-list',
-    loadChildren: () =>
-      import('./session-list/session-list.module').then(
-        (m) => m.SessionListPageModule
-      ),
+    loadChildren: () => import('./session-list/session-list.module').then( m => m.SessionListPageModule)
   },
   {
     path: 'session-detail',
-    loadChildren: () =>
-      import('./session-detail/session-detail.module').then(
-        (m) => m.SessionDetailPageModule
-      ),
+    loadChildren: () => import('./session-detail/session-detail.module').then( m => m.SessionDetailPageModule)
   },
   {
     path: 'notes',
-    loadChildren: () =>
-      import('./notes/notes.module').then((m) => m.NotesPageModule),
-  },
-  {
-    path: 'phone-details',
-    loadChildren: () =>
-      import('./phone-details/phone-details.module').then(
-        (m) => m.PhoneDetailsPageModule
-      ),
-  },
+    loadChildren: () => import('./notes/notes.module').then( m => m.NotesPageModule)
+  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
