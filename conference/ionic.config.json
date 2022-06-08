@@ -1,0 +1,7 @@
+{
+  "name": "conference",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
