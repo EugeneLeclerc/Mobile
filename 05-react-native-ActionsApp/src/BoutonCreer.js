@@ -1,5 +1,5 @@
-import React from 'react'
-import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
+import React from "react";
+import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
 
 /**
  * Bouton permettant de créer une nouvelle action.
@@ -9,36 +9,36 @@ import {StyleSheet, Text, TouchableHighlight, View} from 'react-native'
  * TODO 1. Valoriser la propriété `onPress` de l'élément <TouchableHighlight> avec la valeur de `onValider`
 
  */
-export const BoutonCreer = ({onValider}) => (
-    <View style={styles.conteneurBouton}>
-        <TouchableHighlight
-            underlayColor='#efefef'
-            style={styles.bouton}>
-            <Text style={styles.valider}>
-                Valider
-            </Text>
-        </TouchableHighlight>
-    </View>
-)
+export const BoutonCreer = ({ onValider }) => (
+  <View style={styles.conteneurBouton}>
+    <TouchableHighlight
+      onPress={onValider}
+      underlayColor="#efefef"
+      style={styles.bouton}
+    >
+      <Text style={styles.valider}>Valider</Text>
+    </TouchableHighlight>
+  </View>
+);
 const styles = StyleSheet.create({
-    conteneurBouton: {
-        alignItems: 'flex-end',
-    },
-    bouton: {
-        height: 50,
-        paddingLeft: 20,
-        paddingRight: 20,
-        backgroundColor: '#ffffff',
-        width: 200,
-        marginRight: 20,
-        marginTop: 15,
-        borderWidth: 1,
-        borderColor: 'rgba(0,0,0,.1)',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    valider: {
-        color: '#666666',
-        fontWeight: '600',
-    },
-})
+  conteneurBouton: {
+    alignItems: "flex-end",
+  },
+  bouton: {
+    height: 50,
+    paddingLeft: 20,
+    paddingRight: 20,
+    backgroundColor: "#ffffff",
+    width: 200,
+    marginRight: 20,
+    marginTop: 15,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,.1)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  valider: {
+    color: "#666666",
+    fontWeight: "600",
+  },
+});

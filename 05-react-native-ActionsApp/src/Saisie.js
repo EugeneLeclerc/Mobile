@@ -1,5 +1,5 @@
-import React from 'react'
-import {StyleSheet, TextInput, View} from 'react-native'
+import React from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 
 /**
  * Le composant saisie est un composant sans état.
@@ -17,29 +17,32 @@ import {StyleSheet, TextInput, View} from 'react-native'
  *
  * TODO 4. Valoriser la propriété `onChangeText` de l'élément <TextInput> avec la valeur de `evtTexteModifie`
  */
-export const Saisie = ({texteSaisie, evtTexteModifie}) => (
-    <View>
-        <TextInput
-            placeholder='Quelle prochaine action ?'
-            placeholderTextColor='#CACACA'
-            selectionColor='#666666'/>
-    </View>
-)
-
+export const Saisie = ({ texteSaisie, evtTexteModifie }) => (
+  <View style={styles.conteneurSaisie}>
+    <TextInput
+      style={styles.texteSaisie}
+      value={texteSaisie}
+      onChangeText={(value) => evtTexteModifie(value)}
+      placeholder="Quelle prochaine action ?"
+      placeholderTextColor="#CACACA"
+      selectionColor="#666666"
+    />
+  </View>
+);
 
 const styles = StyleSheet.create({
-    conteneurSaisie: {
-        marginLeft: 20,
-        marginRight: 20,
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        shadowColor: '#000000',
-        shadowOffset: {width: 2, height: 2},
-    },
-    texteSaisie: {
-        height: 60,
-        backgroundColor: '#ffffff',
-        paddingLeft: 10,
-        paddingRight: 10,
-    },
-})
+  conteneurSaisie: {
+    marginLeft: 20,
+    marginRight: 20,
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+    shadowColor: "#000000",
+    shadowOffset: { width: 2, height: 2 },
+  },
+  texteSaisie: {
+    height: 60,
+    backgroundColor: "#ffffff",
+    paddingLeft: 10,
+    paddingRight: 10,
+  },
+});
