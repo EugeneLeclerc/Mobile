@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
     <ion-title>Notes</ion-title>
@@ -9,8 +10,24 @@
 
 <ion-content>
 
-  <ion-button expand="block" (click)="onSave()">Enregistrer</ion-button>
+  <div class="content">
+    <h1>{{title}}</h1>
 
-  <ion-textarea [(ngModel)]="notes"></ion-textarea>
+
+    <ion-button expand="block" (click)="onTakePicture()">Prendre une photo</ion-button>
+
+    <ion-button expand="block" (click)="onSave()">Enregistrer</ion-button>
+
+    <ion-textarea [(ngModel)]="notes"></ion-textarea>
+
+    <div class="images">
+      <ion-list>
+        <ion-item *ngFor="let img of imageList">
+          <img class="images__item" [src]="img">
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
 
 </ion-content>

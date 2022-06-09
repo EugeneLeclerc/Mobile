@@ -27,7 +27,6 @@ export class SessionDetailPage implements OnInit {
       this.sessionService.getSessionById(sessionId)
         .then(data => {
           this.session = data;
-          console.log(this.session);
         });
     }
 
